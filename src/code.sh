@@ -18,11 +18,20 @@ mkdir -p /home/dnanexus/out/archer_api_upload/archer_api_upload
 docker_file_id=project-Gpp93y80b4Zk97Z3XpJPKz2j:file-Gpx212j0b4ZqY7xkvXyKy2bP
 
 # find fastq files in given project and folder
-fastq=$(dx find data --name "*.fastq.gz" --project "$project_id" --folder /${folder_name}/Data/Intensities/BaseCalls --brief)
-
-# donwload fastq files
+if [[ "$specific_folder" ]]; then
+    fastq=$(dx find data --name "*.fastq.gz" --project "$project_id" --folder /${specific_folder}/Data/Intensities/BaseCalls --brief)
+elif [[ "$specific_path" ]]; then
+    fastq=$(dx find data --name "*.fastq.gz" --project "$project_id" --folder /${specific_path} --brief)
+else
+    fastq=$(dx find data --name "*.fastq.gz" --project "$project_id" --folder /${folder_name}/Data/Intensities/BaseCalls --brief)
+fi
+# donwload fastq files except Undetermined fastq files
 for fq in ${fastq[@]}; do
-    dx download $fq
+    fq_name=$(dx describe $fq --json | jq '.name')
+    if [[ ! $fq_name == *Undetermined* ]]
+    then 
+        dx download $fq
+    fi
 done
 
 # download docker image

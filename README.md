@@ -1,13 +1,15 @@
 # dnanexus_archer_api_upload_v1.0.0
-DNAnexus app to upload fastq files onto Archer and submit the job.
+DNAnexus app to upload fastq files onto Archer and submit the job for downstream analysis.
 
 ## How the app works?
 Docker image "archer_api_upload" from https://github.com/moka-guys/archer_api_upload is used to run the app.
 
 ## Input
 - DNAnexus project id where the fastq files are located (string)
-- Archer password in Base64 Encoded format (string)
 - Archer protocol id for the job (integer)
+- folder name (string) -optional to provide if the DNAnexus folder name does not follow the usual format. The usual folder name takes the DNAnexus project name between first and last underscore. 
+For example, if the name of DNAnexus project is 002_240823_NB552085_0333_AHGLY5AFX7_ADX24030, the usual folder name is 240823_NB552085_0333_AHGLY5AFX7.
+- file path (string) - optional to provide if the fastq files are not located in the unusual path. The usual path is <folder_name>/Data/Intensities/BaseCalls
 
 ## Output
 - logfile.txt - txt file containg the log for file uploading and job submission
@@ -20,7 +22,6 @@ The app can be run from the dx CLI. The example below shows the command line to 
 ```
 dx run applet-xxx \
 -iproject_id=project-xxxx \
--iarcher_password=<pw> \
 -iprotocol_id=<id>
 ```
 

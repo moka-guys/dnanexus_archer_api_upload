@@ -26,6 +26,20 @@
             "class": "int",
             "help": "protocol id to be used for the job run on Archer",
             "optional": false
+        },
+        {
+            "name": "specific_folder",
+            "label": "specific folder",
+            "class": "string",
+            "help": "folder name to provide if the folder name in the Dx project does not follow usual format",
+            "optional": true
+        },
+        {
+            "name": "specific_path",
+            "label": "specific path",
+            "class": "string",
+            "help": "folder path to provide if the fastq are not located in the usual path",
+            "optional": true
         }
     ],
     "outputSpec": [
