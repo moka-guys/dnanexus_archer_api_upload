@@ -14,13 +14,6 @@
             "optional": false
         },
         {
-            "name": "archer_password",
-            "label": "archer password",
-            "class": "string",
-            "help": "archer password in Base64 Encoded format",
-            "optional": false
-        },
-        {
             "name": "protocol_id",
             "label": "protocol id",
             "class": "int",

@@ -15,7 +15,7 @@ folder_name=$(printf '%s\n' "${folder_name#*_}")
 mkdir -p /home/dnanexus/out/archer_api_upload/archer_api_upload
 
 # Location of the archer_api_upload docker file
-docker_file_id=project-Gpp93y80b4Zk97Z3XpJPKz2j:file-Gpx212j0b4ZqY7xkvXyKy2bP
+docker_file_id=project-Gpp93y80b4Zk97Z3XpJPKz2j:file-GqQzJ6Q0b4ZqzQP2yB180zy1
 
 # find fastq files in given project and folder
 if [[ "$specific_folder" ]]; then
@@ -33,6 +33,8 @@ for fq in ${fastq[@]}; do
         dx download $fq
     fi
 done
+# download archer auth file
+dx download project-Gpp93y80b4Zk97Z3XpJPKz2j:file-GqQzJzQ0b4ZQKJ5V8gg0pKYF
 
 # download docker image
 dx download $docker_file_id
@@ -43,7 +45,9 @@ echo $DOCKERIMAGENAME
 
 # run docker
 mark-section "Run archer_api_upload docker image"
-docker run -v /home/dnanexus/:/home/dnanexus/ $DOCKERIMAGENAME "/home/dnanexus" ${archer_password} ${folder_name} ${protocol_id} | tee -a "logfile.txt"
+docker run -v /home/dnanexus/:/home/dnanexus/ \
+$DOCKERIMAGENAME /home/dnanexus /home/dnanexus/archer_authentication.txt \
+${folder_name} ${protocol_id} | tee -a "logfile.txt"
 
 # check if the file uploading and job submission are successful
 success=$(grep -o -P '(?<=success\":).*(?=,\"success)' logfile.txt |  sort | uniq)
