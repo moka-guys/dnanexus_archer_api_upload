@@ -24,7 +24,7 @@
             "name": "specific_folder",
             "label": "specific folder",
             "class": "string",
-            "help": "folder name to provide if the folder name in the Dx project does not follow usual format",
+            "help": "folder name to provide if need to specify",
             "optional": true
         },
         {
@@ -32,6 +32,13 @@
             "label": "specific path",
             "class": "string",
             "help": "folder path to provide if the fastq are not located in the usual path",
+            "optional": true
+        },
+        {
+            "name": "job_name",
+            "label": "job name",
+            "class": "string",
+            "help": "job name to provide if want to specify",
             "optional": true
         }
     ],

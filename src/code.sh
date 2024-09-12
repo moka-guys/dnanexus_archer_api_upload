@@ -15,7 +15,7 @@ folder_name=$(printf '%s\n' "${folder_name#*_}")
 mkdir -p /home/dnanexus/out/archer_api_upload/archer_api_upload
 
 # Location of the archer_api_upload docker file
-docker_file_id=project-Gpp93y80b4Zk97Z3XpJPKz2j:file-GqQzJ6Q0b4ZqzQP2yB180zy1
+docker_file_id=project-Gpp93y80b4Zk97Z3XpJPKz2j:file-GqQzJ6Q0b4ZqzQP2yB180zy1 #TODO replace project id after moving to 001
 
 # find fastq files in given project and folder
 if [[ "$specific_folder" ]]; then
@@ -33,8 +33,13 @@ for fq in ${fastq[@]}; do
         dx download $fq
     fi
 done
+
+# take folder name as job name if not specified
+if [[ ! "$job_name" ]]; then
+    job_name=$folder_name
+fi
 # download archer auth file
-dx download project-Gpp93y80b4Zk97Z3XpJPKz2j:file-GqQzJzQ0b4ZQKJ5V8gg0pKYF
+dx download project-Gpp93y80b4Zk97Z3XpJPKz2j:file-GqQzJzQ0b4ZQKJ5V8gg0pKYF # TODO replace the auth file when getting moka password
 
 # download docker image
 dx download $docker_file_id
@@ -47,7 +52,7 @@ echo $DOCKERIMAGENAME
 mark-section "Run archer_api_upload docker image"
 docker run -v /home/dnanexus/:/home/dnanexus/ \
 $DOCKERIMAGENAME /home/dnanexus /home/dnanexus/archer_authentication.txt \
-${folder_name} ${protocol_id} | tee -a "logfile.txt"
+${job_name} ${protocol_id} | tee -a "logfile.txt"
 
 # check if the file uploading and job submission are successful
 success=$(grep -o -P '(?<=success\":).*(?=,\"success)' logfile.txt |  sort | uniq)
