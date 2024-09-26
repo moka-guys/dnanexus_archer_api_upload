@@ -6,7 +6,7 @@ Docker image "archer_api_upload" from https://github.com/moka-guys/archer_api_up
 
 ## Input
 - DNAnexus project id where the fastq files are located (string)
-- Archer protocol id for the job (integer)
+- Archer protocol id for the job (integer) - optional
 - folder name (string) -optional to provide if the DNAnexus folder name does not follow the usual format. The usual folder name takes the DNAnexus project name between first and last underscore. 
 For example, if the name of DNAnexus project is 002_240823_NB552085_0333_AHGLY5AFX7_ADX24030, the usual folder name is 240823_NB552085_0333_AHGLY5AFX7.
 - file path (string) - optional to provide if the fastq files are not located in the unusual path. The usual path is <folder_name>/Data/Intensities/BaseCalls
@@ -22,7 +22,6 @@ In addition to the output files above, it is expected that the submitted job sta
 The app can be run from the dx CLI. The example below shows the command line to be used:
 ```
 dx run applet-xxx \
--iproject_id=project-xxxx \
--iprotocol_id=<id>
+-iproject_id=project-xxxx
 ```
 

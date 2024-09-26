@@ -18,7 +18,7 @@
             "label": "protocol id",
             "class": "int",
             "help": "protocol id to be used for the job run on Archer",
-            "optional": false
+            "optional": true
         },
         {
             "name": "specific_folder",

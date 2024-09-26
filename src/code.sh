@@ -38,6 +38,12 @@ done
 if [[ ! "$job_name" ]]; then
     job_name=$folder_name
 fi
+
+# take default number 2 as protocol id if not specified
+if [[ ! "$protocol_id" ]]; then
+    protocol_id=2
+fi
+
 # download archer auth file
 dx download project-Gpp93y80b4Zk97Z3XpJPKz2j:file-Gqp0YqQ0b4ZjK85GvYbGYYK6 # TODO replace the auth file when getting moka password
 
