@@ -25,7 +25,7 @@ elif [[ "$specific_path" ]]; then
 else
     fastq=$(dx find data --name "*.fastq.gz" --project "$project_id" --folder /${folder_name}/Data/Intensities/BaseCalls --brief)
 fi
-# donwload fastq files except Undetermined fastq files
+# download fastq files except Undetermined fastq files
 for fq in ${fastq[@]}; do
     fq_name=$(dx describe $fq --json | jq '.name')
     if [[ ! $fq_name == *Undetermined* ]]
