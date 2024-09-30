@@ -45,7 +45,7 @@ if [[ ! "$protocol_id" ]]; then
 fi
 
 # download archer auth file
-dx download project-Gpp93y80b4Zk97Z3XpJPKz2j:file-Gqp0YqQ0b4ZjK85GvYbGYYK6 # TODO replace the auth file when getting moka password
+dx download project-FQqXfYQ0Z0gqx7XG9Z2b4K43:file-Gqp0YqQ0b4ZjK85GvYbGYYK6 
 
 # download docker image
 dx download $docker_file_id
