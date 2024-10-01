@@ -15,7 +15,7 @@ folder_name=$(printf '%s\n' "${folder_name#*_}")
 mkdir -p /home/dnanexus/out/archer_api_upload/archer_api_upload
 
 # Location of the archer_api_upload docker file
-docker_file_id=project-Gpp93y80b4Zk97Z3XpJPKz2j:file-Gqp0YGQ0b4ZV2gxJQ9b7yq3g #TODO replace project id after moving to 001
+docker_file_id=project-Gpp93y80b4Zk97Z3XpJPKz2j:file-Gqxvgkj0b4ZpYF58q0f0P0VQ #TODO replace project id after moving to 001
 
 # find fastq files in given project and folder
 if [[ "$specific_folder" ]]; then
